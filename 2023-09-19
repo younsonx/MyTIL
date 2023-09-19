@@ -1,0 +1,270 @@
+예제 3-3
+'''
+#include <stdio.h>
+int main(void)
+{
+	int x, y;
+
+	printf("정수 x의 값을 입력하세요\n");
+	scanf_s("%d", &x);
+	printf("정수 y의 값을 입력하세요\n");
+	scanf_s("%d", &y);
+
+	printf("결과값\n");
+	printf("x = %d\n", x);
+	printf("y = %d\n", y);
+
+	return 0;
+}
+'''
+
+//실핼결과
+정수 x의 값을 입력하세요
+10
+정수 y의 값을 입력하세요
+20
+결과값
+x = 10
+y = 20
+
+###몰랐던것
+scanf() 함수를 사용시 함수가 불안정 하므로 scanf_s를 사용하도록 하자.
+
+# 3.2.데이터 형
+변수가 필요로 하는 정확한 메모리 공간을 확보하게하기 위해서
+
+## 정수형 데이터
+8진수 표시 = 숫자 앞에 0을 붙임 ex) 0123
+16진수 표시 = 숫자앞에 0x를 붙임 ex) 0x123
+일반적으로 int 사용
+
+## 실수형 데이터
+float 10진수에서 6~7자리의 유효숫자를 가짐
+double, long double 약 15자리의 유효숫자를 가짐
+C언어에서 별다른 지정을 하지 않는 한 실수는 double형 사용
+
+## 문자형 데이터
+ASDII code 윈도우 사용하면 거의 모든 컴퓨터에서 사용
+문자를 표현하기 위해 ''작은따옴표 사용 ex)'a'
+
+## printf의 두가지 형식
+1. (문자열);
+2. (형식 제어 문자열, 변수);
+
+2형식에서는 변수의 값이 형식 제어 문자열에 기술된 형식으로 출력.
+형식 지정자가 반드시 필요함.
+
+%d  부호있는 10진수 정수형으로 출력
+%f  수수점 고정형 표기 형식으로 출력
+%lf  double형 실수를 소수점 고정형 표기로 출력
+%c  하나의 문자 출력
+%s  문자열 출력
+%o  부호없는 8진수 형태로 출력
+%x  부호없는 16진수 형태로 출력
+%e  지수 표기 형식으로 출력
+
+## 제어 문자
+\n  줄바꿈 제어 문자
+\t  화면에 탭(tab)을 나타내는 제어 문자
+
+## 데이터의 형 변환
+1. 자동적인 형 변환(with 컴파일러)
+  대입연산시, 산술 연산
+  
+2. 명시적인 형 변환
+  프로그래머가 cast 연산자를 사용하여 인위적으로 형 변환
+
+  ```
+  int x;
+  float y;
+
+  y = (float) x;
+  ```
+
+(float) x 에서는 정수 x의 값을 float 형으로 변환한 다음 이 값을 변수 y에 저장.
+
+### 예제 3-4
+
+```
+#include <stdio.h>
+int main(void)
+{
+	int n = 10;
+	float a = 23.4567;
+	double b = 1234.5;
+	char ch = 'a';
+
+	printf("정수 n = %d\n", n);
+	printf("실수 a = %f\n", a);
+	printf("double 형 실수 b = %lf\n", b);
+	printf("문자 ch = %c, ASCII code = %d\n", ch, ch);
+
+	return 0;
+
+}
+'''
+// 실행결과 
+정수 n = 10
+실수 a = 23.456699
+double 형 실수 b = 1234.500000
+문자 ch = a, ASCII code = 97
+
+### 예제 3-5
+```
+#include <stdio.h>
+int main(void)
+{
+	char ch = 'A';
+	int x = 10, y = 20, z;
+	float a, b;
+
+	z = ch + x;
+	a = x / y;
+	b = (float)x / (float)y;
+
+	printf("z = %d, a = %f, b = %f\n", z, a, b);
+
+	return 0;
+}
+```
+
+//실행결과
+z = 75, a = 0.000000, b = 0.500000
+
+### sizeof => 각 데이터형이 몇byte를 차지하는지를 알기 위한 연산자
+
+형식
+  sizeof(변수명); -> 변수의 데이터 크기를 계산
+  sizeof(데이터형); -> 해당 데이터형의 크기를 byte 단위로 변환
+
+### 예제 3-6
+```
+#include <stdio.h>
+int main(void)
+{
+	int x;
+
+	printf("변수 x의 크기: %d 바이트. \n", sizeof(x));
+	printf("char 형의 크기: %d 바이트. \n", sizeof(char));
+	printf("int 형의 크기: %d 바이트. \n", sizeof(int));
+	printf("float 형의 크기: %d 바이트. \n", sizeof(float));
+	printf("double 형의 크기: %d 바이트. \n", sizeof(double));
+
+	return 0;
+}
+```
+
+// 실행결과
+
+변수 x의 크기: 4 바이트.
+char 형의 크기: 1 바이트.
+int 형의 크기: 4 바이트.
+float 형의 크기: 4 바이트.
+double 형의 크기: 8 바이트.
+
+### 연습문제
+1.
+```
+#include <stdio.h>
+int main(void)
+{
+	char ch;
+
+	printf("문자를 입력하시오\n");
+	scanf_s("%c", &ch);
+
+	printf("A의 ASCII code 값은\n");
+	printf("10진수: %d\n", ch);
+	printf("8진수: %o\n", ch);
+	printf("16진수: %x\n", ch);
+
+	return 0;
+}
+```
+// 실행결과
+문자를 입력하시오
+A
+A의 ASCII code 값은
+10진수: 65
+8진수: 101
+16진수: 41
+
+2.
+```
+#include <stdio.h>
+int main(void)
+{
+	double a;
+
+	printf("실수를 입력하시오:\n");
+	scanf_s("%lf", &a);
+
+	printf("결과값: %e\n", a);
+	return 0;
+
+}
+```
+// 실행결과
+실수를 입력하시오:
+543.21
+결과값: 5.432100e+02
+
+3.
+```
+#include <stdio.h>
+int main(void)
+{
+	double a;
+
+	printf("실수를 입력하시오:\n");
+	scanf_s("%lf", &a);
+
+	printf("소수점 표기 방법: %lf\n", a);
+	printf("지수 표기 방법: %e\n", a);
+
+	return 0;
+
+}
+```
+// 실행결과
+
+실수를 입력하시오:
+354.001592
+소수점 표기 방법: 354.001592
+지수 표기 방법: 3.540016e+02
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
