@@ -351,3 +351,64 @@ int main()
 ```
 
 # 연산자
+
+## LAB_1 생수 값 계산하기
+
+```
+#include <stdio.h>
+
+int main()
+{
+	int person, bottle_for_person;
+
+	printf("전체 인원을 입력하세요: ");
+	scanf_s("%d", &person);
+
+	printf("1인당 생수 개수를 입력하세요: ");
+	scanf_s("%d", &bottle_for_person);
+
+	int total_bottle = person * bottle_for_person;
+	int pack_bottle = total_bottle / 15;
+	int rest_bottle = total_bottle % 15;
+
+	printf("15팩 구매비용 %d원\n", pack_bottle * 10000);
+	printf("낱개 구매 비용 %d원\n", rest_bottle * 900);
+	printf("전체 구매 비용 %d원\n", pack_bottle * 10000 + rest_bottle * 900);
+
+	return 0;
+}
+```
+
+책에서 제시하는 코드
+```
+#include <stdio.h>
+
+int main()
+{
+	int person, amount, pack, bottle;
+
+	printf("전체 인원을 입력하세요: ");
+	scanf_s("%d", &person);
+
+	printf("1인당 생수 개수를 입력하세요: ");
+	scanf_s("%d", &amount);
+
+	bottle = person * amount % 15;
+	pack = (person * amount - bottle) / 15;
+
+	printf("15팩 구매 비용 %d원\n", pack * 10000);
+	printf("낱개 구매 비용 %d원\n", bottle * 900);
+	printf("전체 구매 비용 %d원\n", pack * 10000 + bottle * 900);
+
+	
+	return 0;
+}
+```
+실행결과
+```
+전체 인원을 입력하세요: 57
+1인당 생수 개수를 입력하세요: 3
+15팩 구매 비용 110000원
+낱개 구매 비용 5400원
+전체 구매 비용 115400원
+```
