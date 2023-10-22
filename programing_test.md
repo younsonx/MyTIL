@@ -412,3 +412,155 @@ int main()
 낱개 구매 비용 5400원
 전체 구매 비용 115400원
 ```
+
+### 예제 5 - 4 논리연산자 코드
+
+```
+#include <stdio.h>
+
+int main()
+{
+	int num1, num2;
+
+	printf("2개 숫자를 입력: ");
+	scanf_s("%d, %d", &num1, &num2);
+
+	printf("둘 다 0인가? %d\n", (num1 == 0) && (num2 == 0));
+	printf("양수가 있는가? %d\n", (num1 >= 1) || (num2 >= 1));
+	printf("참의 반대는 무엇인가? %d\n", !1);
+	
+	return 0;
+}
+```
+실행결과
+```
+2개 숫자를 입력: 2, 0
+둘 다 0인가? 0
+양수가 있는가? 1
+참의 반대는 무엇인가? 0
+```
+산술, 비교, 논리 연산자 순으로 우선순위가 정해짐
+
+### 5.2 LAB 2 피자 값 계산하기
+
+```
+#include <stdio.h>
+
+int main()
+{
+	int person, order;
+
+	printf("전체 인원: ");
+	scanf_s("%d", &person);
+
+	order = person / 4;   // 소수점 이하는 버려짐
+	order = order + (person % 4 != 0);   // 소수점 이하 존재 -> 1판 추가
+	printf("주문 피자 수: %d판\n", order);
+	printf("피자 가격: %d원\n", order * 12000);
+
+	return 0;
+}
+```
+실행결과
+```
+전체 인원: 2
+주문 피자 수: 1판
+피자 가격: 12000원
+```
+
+sizeof 자료형의 크기를 알려주는 연산자
+
+### 형 변환
+
+```
+int a;
+double b = 3.5;
+a = b
+```
+실수 -> 정수 변환 시 소수점 이하 버림
+
+a = 3이 들어감
+
+명시적 형 변환
+```
+int a;
+double b = 3.5;
+a = (int)b;
+```
+
+```
+암시적 형 변환은 자신의 의도와 상관없이 데이터가 소실될 수 있음
+특정 의도가 있어서 형 변환을 하고자 할 때는 명시적 형 변환을 사용
+자료형을 변환시키겠다고 표시해주는 것
+```
+
+### 예제 5 - 9 형변환 코드
+```
+#include <stdio.h>
+
+int main()
+{
+	char cnum = 'a';  // a의 아스키 코드 값 97
+	int inum;
+	double fnum;
+
+	inum = cnum;  // 문자가 정수로 변환되어 저장
+	printf("int %d\n", inum);
+
+	cnum = 2000;  // 문자 변수에 2000 대입
+	              // 2000이라는 너무 큰 값을 할당하면 부호화된 문자로 처리됨
+	printf("int %d\n", cnum);
+	
+	fnum = 3.7;  // fnum 초기화
+
+	inum = fnum;  // 정수를 실수로 암시적 변환
+	printf("int %d\n", inum);
+
+	inum = (int)fnum;  // 정수를 실수로 명시적 변환
+	printf("int %d\n", inum);
+
+	return 0;
+}
+```
+실행결과
+```
+int 97
+int -48
+int 3
+int 3
+```
+
+### 5.3 LAB 3 T, F 출력하기
+```
+#include <stdio.h>
+
+// T와 F 출력하기
+
+int main()
+{
+	int num1, num2;
+
+	printf("숫자 두개 입력: ");
+	scanf_s("%d, %d", &num1, &num2);
+
+	printf("두 수가 같은가? %c\n", (num1 == num2) * 14 + 70);
+	printf("num1이 더 큰가? %c\n", (num1 > num2) * 14 + 70);
+	printf("num2는 양수인가? %c\n", (num2 > 0) * 14 + 70);
+
+	return 0;
+}
+```
+실행결과
+```
+숫자 두개 입력: 4, 2
+두 수가 같은가? F
+num1이 더 큰가? T
+num2는 양수인가? T
+```
+의문점 - () * 14 + 70 에서
+14 + 70에 괄호를 안 붙이는 이유는...?
+
+* 아스키 코드
+* T는 84
+* F는 70
+
