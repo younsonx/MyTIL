@@ -245,11 +245,11 @@ int main()
 ```
 ```
 #include <stdio.h>
-#define DIA 9
+#define DIA 9  // 메모리에 들어가지 않은채로 상수가 됨
 
 int main()
 {
-	const double PI = 3.14;
+	const double PI = 3.14;  // 메모리에 들어간 채로 상수가 됨
 	double height = 10.0;
 
 	printf("라벨 높이 = %.2lf\n", height);
@@ -454,6 +454,8 @@ int main()
 	scanf_s("%d", &person);
 
 	order = person / 4;   // 소수점 이하는 버려짐
+// 사람수가 4배수 이면 그대로 시킴
+// 사람수가 4배수가 아니면 1판 더 시킴
 	order = order + (person % 4 != 0);   // 소수점 이하 존재 -> 1판 추가
 	printf("주문 피자 수: %d판\n", order);
 	printf("피자 가격: %d원\n", order * 12000);
@@ -466,6 +468,27 @@ int main()
 전체 인원: 2
 주문 피자 수: 1판
 피자 가격: 12000원
+```
+```
+#include <stdio.h>
+
+int main()
+{
+	int person, order;
+
+	printf("전체 인원: ");
+	scanf_s("%d", &person);
+
+	order = person / 4;   // 소수점 이하는 버려짐
+	// 사람수가 4배수 이면 그대로 시킴
+	// 사람수가 4배수가 아니면 1판 더 시킴
+	if (person % 4 != 0)
+		order = order + 1; // 소수점 이하 존재 -> 1판 추가
+	printf("주문 피자 수: %d판\n", order);
+	printf("피자 가격: %d원\n", order * 12000);
+
+	return 0;
+}
 ```
 
 sizeof 자료형의 크기를 알려주는 연산자
@@ -559,6 +582,7 @@ num2는 양수인가? T
 ```
 의문점 - () * 14 + 70 에서
 14 + 70에 괄호를 안 붙이는 이유는...?
+연산 순서떄문에
 
 * 아스키 코드
 * T는 84
