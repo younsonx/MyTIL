@@ -753,3 +753,170 @@ res = 1, num1 = 1, num2 = 1
 ```
 이 나와야 맞는것 같은데
 왜 실행결과가 그대로 나오는것 일까
+
+# chapter 6 
+
+## 6.1 제어문 
+
+무작위 수를 만드는 함수 rand()
+```
+com = rand();  // rand() 함수가 무작위 수를 만들어 com에 대입
+
+<stdlib.h> 파일에 포함되어 있는 함수이다.
+
+#include <stdlib.h> 이라 선언
+
+게임 만들때 꼭 필요한 함수 이다.
+
+int com;
+
+com = rand() % 10;  // 0에서부터 9까지 무작위 수 생성
+com rand() % 10 +1;  // 1에서 부터 9까지 무작위 수 생성
+```
+
+### 예제 6-1
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+	int com;
+
+	com = rand();
+	printf("%d\n", com);
+
+	com = rand() % 10;
+	printf("%d\n", com);
+
+	com = rand() % 10 + 1;
+	printf("%d\n", com);
+
+	return 0;
+}
+```
+실행결과
+```
+41
+7
+5
+```
+## srand()함수
+
+rand()는 매번 같은 수를 만들어 낸다
+
+따라서 서로 다른 무작위 수를 만드려면 srand() 필요하다
+
+rand() 사용전에 한 번만 사용하면 됨
+```
+include <time.h>
+
+srand((unsigned)time(NULL));
+여기서 unsigned는 형 변환을 도와주는 수식어임
+```
+### 예제 6 - 2
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+	int com;
+
+	srand((unsigned)time(NULL));
+
+	com = rand();
+	printf("%d\n", com);
+
+	com = rand() % 10;
+	printf("%d\n", com);
+
+	com = rand() % 10 + 1;
+	printf("%d\n", com);
+
+	return 0;
+}
+```
+실행결과
+```
+20006
+4
+2
+```
+예제 6 - 1과 달리 코드 몇개만 추가 해줬더니 무작위수를 만들어 낸다.
+
+## if~else
+
+### 예제 6 - 4
+```
+#include <stdio.h>
+int main()
+{
+	int birth, age;
+
+	printf("이번달에 생일 입니까? yes = 1, no = 0: ");
+	scanf_s("%d", &birth);
+
+	printf("나이를 입력하세요: ");
+	scanf_s("%d", &age);
+
+	if ((birth == 1) && (age >= 19))
+		printf("축하합니다 모히또 한 잔 당첨\n"); // 조건이 참(1)일 경우 실행
+
+	return 0;
+}
+```
+실행결과
+```
+이번달에 생일 입니까? yes = 1, no = 0: 1
+나이를 입력하세요: 19
+축하합니다 모히또 한 잔 당첨
+```
+```
+if ((birth == 1) && (age >= 19))
+이 코드를
+if (birth == 1 && age >= 19)
+이렇게 바꾸면 무슨일이 일어나는지 관찰해 보자
+```
+```
+비교 연산자가 논리 연산자보다 먼저 연산되므로 동일한 결과가 출력이 될 것이다
+그러나 이 경우에는 논리 연산자(&&)와 비교 연산자(==, >=)가 함께 사용되는 것으로, C 언어의 연산자 우선순위 규칙에 따라 괄호를 사용하지 않더라도 코드는 올바르게 작동된다
+```
+
+### 예제 6 - 7
+```
+#include <stdio.h>
+int main()
+{
+	int time, meal_money, bounos_money = 0;
+	int sum = 0;
+
+	printf("일 한 시간을 입력하세요: ");
+	scanf_s("%d", &time);
+
+	meal_money = time / 4;
+
+	if (time < 40)
+	{
+		sum = (time * 12800) + (meal_money * 9000);
+		sum = sum + (sum * 0.02);
+
+		printf("당신이 받을 금액은 %d", sum);
+	}
+	else
+	{
+		sum = (time * 12800) + (meal_money * 10000);
+		sum = sum + (sum * 0.1);
+
+		printf("당신이 받을 금액은 %d", sum);
+	}
+
+	return 0;
+}
+```
+실행결과
+```
+일 한 시간을 입력하세요: 44
+당신이 받을 금액은 740520
+```
