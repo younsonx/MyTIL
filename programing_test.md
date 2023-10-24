@@ -920,3 +920,145 @@ int main()
 일 한 시간을 입력하세요: 44
 당신이 받을 금액은 740520
 ```
+
+### LAB 2 가위바위보 게임
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+	int com, user;
+
+	srand((unsigned)time(NULL));
+
+	printf("가위 0 바위1 보2 선택: ");
+	scanf_s("%d", &user);
+
+	com = rand() % 3;
+
+	printf("user = %d, com = %d", user, com);
+
+	if (com == user)
+		printf("비겼습니다\n");
+	else if ((com == 0) && (user == 1) || (com == 1) && (user == 2) || (com == 2) && (user == 0))
+		printf("사용자 승\n");
+	else
+		printf("컴퓨터 승\n");
+
+	return 0;
+}
+```
+실행결과
+```
+가위 0 바위1 보2 선택: 0
+user = 0, com = 2사용자 승
+```
+```
+가위 0 바위1 보2 선택: 2
+user = 2, com = 2비겼습니다
+```
+
+만약 사용자가 2보다 큰 수를 입력했을때 강제로 종료 시키는 프로그램
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+	int com, user;
+
+	srand((unsigned)time(NULL));
+
+	printf("가위 0 바위1 보2 선택: ");
+	scanf_s("%d", &user);
+
+	if (user > 2)
+	{
+		printf("0~2 사이 숫자만 입력해야 합니다(해당하는 포지션 없음)");
+		return 1;
+	}
+
+	com = rand() % 3;
+
+	printf("user = %d, com = %d", user, com);
+
+	if (com == user)
+		printf("비겼습니다\n");
+	else if ((com == 0) && (user == 1) || (com == 1) && (user == 2) || (com == 2) && (user == 0))
+		printf("사용자 승\n");
+	else
+		printf("컴퓨터 승\n");
+
+	return 0;
+}
+```
+실행결과
+```
+가위 0 바위1 보2 선택: 3
+0~2 사이 숫자만 입력해야 합니다(해당하는 포지션 없음)
+```
+
+사용자가 0, 1, 2 이외의 숫자를 입력했을 때 게임을 다시 시작하도록 만들기
+
+```
+무한 루프 구문인 while(1)을 사용하여 만들 수 있다
+
+올바른 입력을 받았을때 루프를 종료하기 위해 break를 사용해야 한다
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() 
+{
+    int com, user;
+
+    srand((unsigned)time(NULL));
+
+    while (1) 
+    {
+        printf("가위 0 바위 1 보 2 선택: ");
+        scanf_s("%d", &user);
+
+        if (user < 0 || user > 2) 
+        {
+            printf("0~2 사이 숫자만 입력해야 합니다. 다시 입력하세요.\n");
+        }
+        else 
+        {
+            com = rand() % 3;
+            printf("user = %d, com = %d\n", user, com);
+
+            if (com == user)
+                printf("비겼습니다\n");
+            else if ((com == 0 && user == 1) || (com == 1 && user == 2) || (com == 2 && user == 0))
+                printf("사용자 승\n");
+            else
+                printf("컴퓨터 승\n");
+
+            break; // 올바른 입력을 받았으므로 루프를 종료합니다.
+        }
+    }
+
+    return 0;
+}
+
+while(1) 루프를 사용하여 사용자의 입력이 해당 범위 내에 있는지 판단하고 올바른 입력을 받으면
+루프를 종료하고 게임이 진행된다
+```
+실행결과
+```
+가위 0 바위 1 보 2 선택: 3
+0~2 사이 숫자만 입력해야 합니다. 다시 입력하세요.
+가위 0 바위 1 보 2 선택: 2
+user = 2, com = 1
+사용자 승
+```
+교수님 왈
+```
+ else if ((com == 0 && user == 1) || (com == 1 && user == 2) || (com == 2 && user == 0))
+```
+"사용자 승" 이 나오는 이 코드를 더 간단히 짜 보아라.. 규칙성을 발견해서
