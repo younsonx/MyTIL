@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+void swap(int *one, int *two) {
+	int temp;
+
+	temp = *one;
+	*one = *two;
+	*two = temp;
+}
+
+int main() {
+	int first = 7, second = 24;
+
+	swap(&first, &second);
+	printf("f=%d, s=%d", first, second);
+
+	return 0;
+}
+
+
+#include <stdio.h>
+
+void fry(int min) {
+	printf("우유에 재우기\n");
+	printf("튀김옷 입히기\n");
+	printf("%d분 튀기기\n", min);
+}
+
+int main() {
+
+	fry(5);
+	printf("고천소스 바르기\n");
+
+	return 0;
+}
