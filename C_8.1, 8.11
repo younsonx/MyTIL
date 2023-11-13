@@ -33,3 +33,45 @@ int main() {
 
 	return 0;
 }
+
+#include <stdio.h>
+
+double print_string(char str[]) {
+	int k;
+
+	for (k = 0; str[k] != 0; k++)
+		printf("%c", str[k]);
+	printf("\n");
+	printf("%s", str);
+}
+
+int main() {
+	char str[10] = "TED CHANG";
+
+	print_string(str);
+
+	return 0;
+}
+
+
+#include <stdio.h>
+
+int print_score(int score[], int size) {
+	int sum = 0, k;
+
+	for (k = 0; k < size; k++) {
+		printf("%d = %d점, ", k, score[k]);
+		sum += score[k];
+	}
+
+	return sum;
+}
+
+int main() {
+
+	int score[5] = {75, 84, 13, 96, 46}, sum;
+
+	sum = print_score(score, 5);
+	printf("\n 총합 = %d", sum);
+	return 0;
+}
