@@ -192,40 +192,46 @@ void book_seat()
 void cancel()
 {
 	char row;
+	int ch;
 	int seat, pin;
-	int ch = 1;
 	node* cn;
-
 	do
 	{
 		ch = 1;
 		cn = hn;
-		printf("SEAT NUMBUR :");
+		printf("SEAT NUMBER :");
 		scanf(" %c", &row);
-		scanf("%d", seat);
-		printf("PIN: ");
+		scanf("%d", &seat);
+		printf("PIN :");
 		scanf("%d", &pin);
-
 		while (cn->next != hn)
 		{
 			if (cn->row_no == row && cn->seat_no == seat && cn->pin == pin)
 			{
-				printf("Are you sure u want to cancle the seat? (y/n) ");
+				printf("Are you sure u want to cancle the Seat (y/n) ");
 				char c;
 				scanf(" %c", &c);
-				
 				if (c == 'y' || c == 'Y')
 				{
-					printf("seat canceled succesfully!\n");
+					printf("SEAT CANCELED SUCCESFULLY!\n");
 					cn->book = 'a';
 				}
 			}
 			else if (cn->row_no == row && cn->seat_no == seat && cn->pin != pin)
 			{
-				printf("")
+				printf("invalid SEAT NUMBER && PIN combination!!!!\n");
 			}
+			cn = cn->next;
 		}
-	}
+		
+		printf("\n\nPRESS 1 To Check Seat Status\n");
+		printf("PRESS 2 To Cancle More Tickets\n");
+		printf("PRESS 3 To Exit CANCELATION PORTAL\n");
+		printf("\ninput: ");
+		scanf("%d", &ch);
+		if (ch == 1);
+		// display();
+	} while (ch == 2);
 }
 
 int main()
@@ -257,7 +263,15 @@ int main()
 			cancel();
 			display();
 			break;
+		case 3:
+			printf("\n\nPRESS 1 To Main Menu\n");
+			printf("PRESS 2 To Exit CINEMAX PORTAL\n");
+			printf("\ninput: ");
+			scanf("%d", &c);
+
 		}
+
+
 	} while (c != 2);
 	printf("\n\n\n");
 	return 0;
