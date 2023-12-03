@@ -6,10 +6,12 @@
 #include <ctype.h>
 
 #define w 119
+#define r 114
 
 char key;
 
 void volley_ball();
+void re_volleyball();
 void basket_ball();
 void running();
 void weight();
@@ -22,9 +24,12 @@ void timer_10s();
 void timer_20s();
 void timer_30s();
 void timer_60s();
+void run_timer_10s();
 
 // 조깅에서 걷기 타이머 설정하기
 void timer_warking();
+
+void clearScreen();
 
 int num;
 
@@ -42,11 +47,11 @@ int main()
 
 	if (num == 1)
 	{
-		// volley_ball();
+		volley_ball();
 	}
 	else if (num == 2)
 	{
-		// basket_ball();
+		basket_ball();
 	}
 	else if (num == 3)
 	{
@@ -54,14 +59,25 @@ int main()
 	}
 	else if (num == 4)
 	{
-		// weight();
+		weight();
 	}
 	else if (num == 5)
 	{
-		// Exit_pro();
+		Exit_pro();
 	}
 
 	return 0;
+}
+
+void clearScreen() {
+	COORD topLeft = { 0, 0 }; // 화면 좌측 상단의 좌표 (0, 0)
+	HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO screen;
+	DWORD written;
+
+	GetConsoleScreenBufferInfo(console, &screen); // 현재 화면 버퍼 정보 가져오기
+	FillConsoleOutputCharacterA(console, ' ', screen.dwSize.X * screen.dwSize.Y, topLeft, &written); // 화면을 공백으로 채우기
+	SetConsoleCursorPosition(console, topLeft); // 커서를 좌측 상단으로 이동
 }
 
 void timer_10s()
@@ -94,7 +110,7 @@ void timer_20s()
 {
 	int countdown = 20; // 카운트다운을 10으로 초기화
 
-	printf("10초 타이머를 시작합니다.\n");
+	printf("20초 타이머를 시작합니다.\n");
 
 	printf("시작 하려면 enter 입력\n");
 
@@ -140,7 +156,7 @@ void timer_30s()
 	printf("타이머가 종료되었습니다!\n");
 }
 
-void timer_60()
+void timer_60s()
 {
 	int countdown = 60; // 카운트다운을 10으로 초기화
 
@@ -167,18 +183,87 @@ void timer_60()
 
 void timer_warking()
 {
-	key = _getch();
+	char key = _getch();
+	key = tolower(key);
 
-	char key = 'W';
+	int goal_run = 3;
+	int warkingCounter = 0;
 
-	tolower(key) == 'w';
+	printf("목표 바퀴: %d\n", goal_run);
+	printf("완료 바퀴: %d\n", warkingCounter);
+	printf("걷기 타이머를 시작하려면 w 입력\n");
 
-	if (key == w)
+	system("cls");
+
+	while (warkingCounter < goal_run)
 	{
-		timer_10s();
+		key = _getch();
+		if (key == 119)
+		{
+			warkingCounter++;
+
+			printf("목표 바퀴: %d\n", goal_run);
+			printf("완료 바퀴: %d\n", warkingCounter);
+
+			run_timer_10s();
+		}
 	}
 
+	printf("목표 바퀴 달성!\n\n");
+	printf("60초간 휴식!\n\n");
+	timer_60s();
+
 }
+
+void run_timer_10s()
+{
+	int countdown = 10; // 카운트다운을 10으로 초기화
+
+	printf("10초 타이머 시작!.\n");
+
+	printf("호흡을 내뱉으며 걷기\n");
+	printf("시작하려면 w 입력\n");
+
+	key = _getch();
+	key = 119;
+
+	system("cls");
+
+	while (countdown > 0) {
+		printf("%d초 남았습니다.\n", countdown);
+		Sleep(1000); // 1초 대기
+
+		countdown--; // 카운트다운을 감소시킴
+
+		system("cls");
+
+	}
+}
+
+/* void running_w()
+{
+	int goal_run = 3;
+	int warkingCounter = 0;
+
+	while (warkingCounter < goal_run)
+	{
+		key = _getch();
+		if (key == 119)
+		{
+			warkingCounter++;
+
+			printf("목표 바퀴: %d\n", goal_run);
+			printf("완료 바퀴: %d\n", warkingCounter);
+
+			run_timer_10s();
+		}
+	}
+
+	printf("목표 바퀴 달성!\n\n");
+	printf("60초간 휴식!\n\n");
+	timer_60s();
+
+}*/
 
 void running()
 {
@@ -215,8 +300,7 @@ void running()
 
 	system("cls");
 
-	printf("중간 정도의 속력으로 운동장 3바퀴 돌기\n     1바퀴 뛰고 10초 걷기를 유지하세요\n");
-	printf("걷기 타이머를 시작하려면 'w'입력\n");
+	printf("중간 정도의 속력으로 운동장 3바퀴 돌기\n     1바퀴 뛰고 10초 걷기를 유지하세요\n\n");
 
 	timer_warking();
 
@@ -239,4 +323,110 @@ void HRmax()
 	printf("당신의 최대 심박수는 %d\n 최대 심박수를 넘어가지 않게 주의 하세요!!\n", hrmax);
 	printf("최대 심박수 보다 심박수가 높아진다면 종료키를 입력\n");
 
+}
+
+void volley_ball()
+{
+	printf("어깨, 하체, 허리 스트레칭 시작하겠습니다\n");
+	printf("아무 키나 눌러서 진행\n");
+	_getch();
+
+	int c;
+	while ((c = getchar()) != '\n' && c != EOF); // 개행 문자까지 버퍼 비우기
+
+	system("cls");
+
+	do
+	{
+		printf("어깨 스트레칭 시작!\n\n");
+		printf("1. 한 팔을 안쪽으로 보내고 다른쪽 팔로 팔을 당겨주세요\n");
+		printf("2. 다른쪽도 똑같이 실시 합니다.\n\n");
+		timer_30s();
+
+		system("cls");
+
+		printf("1. 한 쪽 손을 뒤로 넘기고 다른 손으로 팔꿈치를 잡고 뒤쪽으로 당겨주세요\n");
+		printf("2. 다른쪽도 똑같이 실시 합니다.\n\n");
+		timer_30s();
+
+		system("cls");
+
+		printf("하체 스트레칭 시작!\n");
+		printf("무릎 굽혔다 펴기 실시\n\n");
+		timer_20s();
+
+		system("cls");
+
+		printf("1. 무릎 시계방향으로 돌리기\n");
+		printf("2. 무릎 반시계방향으로 돌리기\n\n");
+		timer_20s();
+
+		system("cls");
+
+		printf("런지 실시\n\n");
+		timer_10s();
+
+		system("cls");
+
+		printf("1. 앞쪽 허벅지 근육 스트레칭\n");
+		printf("2. 허벅지 안쪽 근육 스트레칭\n");
+		printf("3. 종아리 근육 스트레칭\n\n");
+
+		printf("각 20초씩 실시 하세요\n\n");
+
+		timer_60s();
+
+		system("cls");
+
+		printf("허리 스트레칭 시작하겠습니다.\n\n");
+		printf("1. 기립근 스트레칭 시작\n	코브라 자세를 실시 하세요\n\n");
+		timer_10s();
+
+		system("cls");
+
+		printf("1. 허리를 좌우 흔들어가며 외복사근 스트레칭 시작\n\n");
+		timer_20s();
+
+		printf("스트레칭 끝났습니다.\n\n");
+		printf("기초 동작 실시하고 본 게임을 즐기세요!\n");
+
+		printf("스트레칭을 한번 더 실시하고 싶다면'r' 클릭\n");
+		printf("종료하려면 esc 입력\n");
+	} while (key);
+	{
+		char key = _getch();
+		key = tolower(key);
+
+		if (key == 114)
+		{
+			system("cls");
+			volley_ball();
+		}
+		else if (key == 27)
+		{
+			exit(0);
+		}
+		
+	}
+
+}
+
+void re_volleyball()
+{
+	key = _getch();
+
+	char key = 'R';
+
+	tolower(key) == 'r';
+
+	if (key == 114)
+	{
+		system("cls");
+		volley_ball();
+	}
+
+	else if (key == 27)
+	{
+		exit(0);
+	}
 }
