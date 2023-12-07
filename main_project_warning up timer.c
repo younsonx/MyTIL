@@ -15,7 +15,7 @@ char key;
 void volley_ball();
 void basket_ball();
 void running();
-//void weight();
+void weight();
 void Exit_pro();
 
 void HRmax();
@@ -60,7 +60,7 @@ int main()
 		}
 		else if (num == 4)
 		{
-			//weight();
+			weight();
 		}
 		else if (num == 5)
 		{
@@ -243,12 +243,12 @@ void running()
 		system("cls");
 
 		printf("30m 왕복 달리기 실시\n");
-		/*timer(10);
+		timer(10);
 
 		system("cls");
 
 		printf("50m 왕복 달리기 실시\n");
-		timer(30);*/
+		timer(30);
 
 		system("cls");
 
@@ -458,6 +458,73 @@ void basket_ball()
 			system("cls");
 			printf("스트레칭을 다시 시작합니다!\n");
 			volley_ball();
+		}
+		else if (key == 27)
+		{
+			exit(0);
+		}
+
+	}
+
+}
+
+void weight()
+{
+	printf("웨이트 트레이닝 시작하기에 앞서 간단한 운동을 실시 하겠습니다\n");
+	printf("아무 키나 입력\n");
+
+	_getch();
+
+	system("cls");
+
+	printf("      운동 리스트      \n");
+	printf("    1. 팔굽혀 펴기               \n");
+	printf("    2. 런지  \n");
+	printf("    3. 크런치\n");
+	printf("    4. 버피테스트\n\n");
+	printf("아무 키나 입력..\n");
+
+	_getch();
+
+	int c;
+	while ((c = getchar()) != '\n' && c != EOF); // 개행 문자까지 버퍼 비우기
+
+	system("cls");
+
+	do
+	{
+		printf("팔굽혀 펴기 시작!\n");
+		timer(20);
+
+		system("cls");
+
+		printf("런지 시작!\n");
+		timer(20);
+
+		system("cls");
+
+		printf("크런치 시작!\n");
+		timer(20);
+
+		system("cls");
+
+		printf("버피테스트 시작!\n");
+		timer(20);
+
+		system("cls");
+
+		printf("기본운동 끝났습니다~\n\n");
+		printf("한번 더 하려면 'r'입력\n종료하려면 esc입력\n");
+	} while (key);
+	{
+		char key = _getch();
+		key = tolower(key);
+
+		if (key == 114)
+		{
+			system("cls");
+			printf("운동을 다시 시작합니다!\n");
+			weight();
 		}
 		else if (key == 27)
 		{
