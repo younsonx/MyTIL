@@ -41,7 +41,7 @@ int main()
 int main()
 {
 	int x = 100, y = 200;
-	int dummy;
+	int dummy = NULL; //  초기 값을 대입하지 않으면 쓰레기 값이 들어가므로 NULL로 초기
 
 	int* px = &x, * py = &y;
 	int* pd = &dummy;
