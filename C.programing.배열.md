@@ -1,3 +1,36 @@
+## 배열 개요
+
+#### 수직 사운드 미터 코드
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+	int k, jul, met, sound[60];
+
+	for (k = 0; k < 200; k++)
+	{
+		system("cls");
+		for (met = 0; met < 60; met++)
+			sound[met] = rand() % 25;  // 막대기 높이
+
+		for (jul = 0; jul < 25; jul++)  // 막대기 줄 수
+		{
+			for (met = 0; met < 60; met++)
+			{
+				if (sound[met] <= jul)
+					printf("ㅁ");
+				else
+					printf("  ");
+			}
+			printf("\n");
+		}
+	}
+	return 0;
+}
+```
+
 ## 배열 활용
 
 #### 소나기 코드
